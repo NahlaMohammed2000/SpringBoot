@@ -4,9 +4,16 @@ import lombok.Data;
 import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
+
+/**
+ * The type Student.
+ */
 
 @Entity
 @Data
@@ -20,8 +27,12 @@ public class Student {
     private int age;
     private LocalDateTime dateBirth;
     private LocalDateTime modifiedDate;
+    @Column(name="email",unique = true,nullable = false)
+    private String email;
+    @Column(name="password",nullable = false)
+    private String password;
 
     @OneToMany(cascade =CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "student")
     private Set<Book> bookSet;
-
 }
+
